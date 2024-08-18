@@ -29,7 +29,7 @@ const CreateTodo = () => {
     }
 
     return (
-        <View>
+        <View className='py-10 bg-neutral-700'>
         <Text>CreateTodo</Text>
         <TextInput placeholder="Enter your todo" 
         value={todo}

@@ -4,6 +4,7 @@ export default function RootLayout() {
     return (
     <Slot screenOptions={{
         headerShown: false,
+        color: '#404040'
         }}
         
     />

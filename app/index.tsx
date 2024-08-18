@@ -19,7 +19,7 @@ export default function App() {
   }, [])
 
   return (
-    <View>
+    <View className='bg-neutral-700'>
       {session && session.user ? <Home key={session.user.id} session={session} /> : <Auth />}
     </View>
   )
