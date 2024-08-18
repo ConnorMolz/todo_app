@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { Button, Input } from '@rneui/themed'
 import { Session } from '@supabase/supabase-js'
 import { router } from 'expo-router'
@@ -44,17 +44,21 @@ export default function Home({ session }: { session: Session }) {
       router.navigate("/CreateTodo")
   }
 
+  function goToTodo(id:number){
+    router.navigate(`/${id}`)
+  }
+
   return (
     <View className='py-10 bg-neutral-700'>
       {
         todos.map((todo) => (
-          <View key={todo.id} className='flex-row justify-between bg-neutral-600 p-5 m-5 rounded-lg'>
+          <TouchableOpacity key={todo.id} className='flex-row justify-between bg-neutral-600 p-5 m-5 rounded-lg' onPress={() =>goToTodo(todo.id)} >
             <View>
               <Text className='text-neutral-100 text-xl'>{todo.todo}</Text>
               <Text className='text-neutral-300'>{new Date(todo.created_at).toLocaleString()}</Text>
             </View>
             <Button title="Done" onPress={() => { markAsDone(todo.id)}} />
-          </View>
+          </TouchableOpacity>
         ))
       }
 
