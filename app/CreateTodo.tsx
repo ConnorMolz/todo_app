@@ -1,10 +1,10 @@
 import { View, Text, TextInput } from 'react-native'
 import React, { useEffect } from 'react'
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../lib/supabase';
 import { Session } from '@supabase/supabase-js';
 import { Button } from '@rneui/themed';
 import { router } from 'expo-router';
-import Home from './Home';
+import Home from './(tabs)/Home';
 
 const CreateTodo = () => {
     const [todo, setTodo] = React.useState('');
