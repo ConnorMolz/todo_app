@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { supabase } from './lib/supabase'
-import Auth from './components/Auth'
-import Account from './components/Account'
+import { supabase } from '../lib/supabase'
+import Auth from '../components/Auth'
 import { View } from 'react-native'
 import { Session } from '@supabase/supabase-js'
+import { Redirect } from 'expo-router'
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -20,7 +20,7 @@ export default function App() {
 
   return (
     <View>
-      {session && session.user ? <Account key={session.user.id} session={session} /> : <Auth />}
+      {session && session.user ? <Redirect href="/Home" key={session.user.id} /> : <Auth />}
     </View>
   )
 }
