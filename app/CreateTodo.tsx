@@ -4,7 +4,6 @@ import { supabase } from '../lib/supabase';
 import { Session } from '@supabase/supabase-js';
 import { Button } from '@rneui/themed';
 import { router } from 'expo-router';
-import Home from './(tabs)/Home';
 
 const CreateTodo = () => {
     const [todo, setTodo] = React.useState('');
