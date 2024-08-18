@@ -1,79 +1,71 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '../../lib/supabase'
-import { StyleSheet, View, Alert } from 'react-native'
+import { supabase } from '@/lib/supabase'
+import { View, Text } from 'react-native'
 import { Button, Input } from '@rneui/themed'
 import { Session } from '@supabase/supabase-js'
 import { router } from 'expo-router'
+import CreateTodo from './CreateTodo'
 
-export default function Home() {
-  const [loading, setLoading] = useState(true)
-  const [session, setSession] = useState<Session | null>(null)
+export default function Home({ session }: { session: Session }) {
+  const [todos, setTodos] = useState<{ id: any; todo: any; created_at: any; }[]>([])
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
-    if (session) getProfile()
+    if (session) getTodos()
   }, [session])
 
-  async function getProfile() {
-    try {
-      setLoading(true)
-      if (!session?.user) throw new Error('No user on the session!')
-
-      const { data, error, status } = await supabase
-        .from('profiles')
-        .select(`username, website, avatar_url`)
-        .eq('id', session?.user.id)
-        .single()
-      if (error && status !== 406) {
-        throw error
+  async function getTodos() {
+    supabase.from('todos').select("id, todo, created_at").eq('from', session.user.id).eq('done', false).then(({ data, error }) => {
+      if (error) {
+        console.error('error', error)
+        return
       }
+      console.log(data)
+      setTodos(data)
+    })
+}
 
-      if (data) {
-
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        Alert.alert(error.message)
-      }
-    } finally {
-      setLoading(false)
-    }
+  function logout() {
+    supabase.auth.signOut(); 
+    router.navigate("/")
   }
 
-  function logOut() {
-    supabase.auth.signOut()
-    setSession(null)
-    router.push('/')
+  function markAsDone(id: any) {
+    supabase.from('todos').update({ done: true }).eq('id', id).then(({ data, error }) => {
+      if (error) {
+        console.error('error', error)
+        return
+      }
+      console.log(data)
+      getTodos()
+
+    })
   }
 
+  function gotToCreateTodo() {
+      router.navigate("/CreateTodo")
+  }
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input label="Email" value={session?.user?.email} disabled />
+    <View className='py-10 bg-neutral-700'>
+      {
+        todos.map((todo) => (
+          <View key={todo.id} className='flex-row justify-between bg-neutral-600 p-5 m-5 rounded-lg'>
+            <View>
+              <Text className='text-neutral-100 text-xl'>{todo.todo}</Text>
+              <Text className='text-neutral-300'>{new Date(todo.created_at).toLocaleString()}</Text>
+            </View>
+            <Button title="Done" onPress={() => { markAsDone(todo.id)}} />
+          </View>
+        ))
+      }
+
+      <View>
+        <Button title="Create New Todo" onPress={() => gotToCreateTodo()} />
       </View>
-
-
-      <View style={styles.verticallySpaced}>
-        <Button title="Sign Out" onPress={() => logOut()} />
+      <View>
+        <Button title="Sign Out" onPress={() => logout()} />
       </View>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: 20,
-  },
-})
