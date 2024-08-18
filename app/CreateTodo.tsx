@@ -28,13 +28,19 @@ const CreateTodo = () => {
     }
 
     return (
-        <View className='py-10 bg-neutral-700'>
-        <Text>CreateTodo</Text>
-        <TextInput placeholder="Enter your todo" 
-        value={todo}
-        onChangeText={setTodo}
-        />
-        <Button onPress={sendTodo} title={"Create Todo"}>Create Todo</Button>
+        <View className='py-10 bg-neutral-700 flex-1'>
+            <Text className='text-4xl text-white text-center py-16'>CreateTodo</Text>
+            <View className='justify-center py-10'>
+                <TextInput placeholder="Enter your todo" 
+                    value={todo}
+                    onChangeText={setTodo}
+                    className='bg-white p-2 m-2 scroll-py-10'
+                    multiline={true}
+                    editable={true}
+                    numberOfLines={5}
+                />
+            </View>
+            <Button onPress={sendTodo} title={"Create Todo"}>Create Todo</Button>
         </View>
     )
     }
