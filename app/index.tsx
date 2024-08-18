@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase'
 import Auth from '../components/Auth'
 import { View } from 'react-native'
 import { Session } from '@supabase/supabase-js'
-import Home from '@/app/(tabs)/Home'
+import Home from '@/app/Home'
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
