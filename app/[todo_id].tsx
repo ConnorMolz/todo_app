@@ -29,7 +29,7 @@ const UpdateTodo = () => {
     }
 
     function updateTodo(){
-        supabase.from('todos').update({ todo: todo }).eq('id', todo_id).then(({ data, error }) => {
+        supabase.from('todos').update({ todo: todo }).eq('id', todo_id).eq("from", session?.user.id).then(({ data, error }) => {
             if (error) {
                 console.error('error', error)
                 return
