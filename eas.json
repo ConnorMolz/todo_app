@@ -10,16 +10,16 @@
       "preview": {
         "android": {
           "distribution": "internal",
-          "buildType": "app-bundle"
+          "buildType": "apk"
         },
         "distribution": "internal"
       },
-      
+
       "production": {
         "android": {
           "buildType": "apk"
         },
-        "node": "20.0.14",
+        "node": "20.14.0",
         "env": {
           "ANDROID_HOME": "/home/connor/Android/Sdk"
         }
