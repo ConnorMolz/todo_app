@@ -48,6 +48,10 @@ export default function Home({ session }: { session: Session }) {
     router.navigate(`/${id}`)
   }
 
+  function goToAllTodos(){
+    router.navigate("/all_todos")
+  }
+
   return (
     <View className='py-10 bg-neutral-700'>
       {
@@ -64,6 +68,9 @@ export default function Home({ session }: { session: Session }) {
 
       <View>
         <Button title="Create New Todo" onPress={() => gotToCreateTodo()} />
+      </View>
+      <View>
+        <Button title="Show all Todos" onPress={() => goToAllTodos()} />
       </View>
       <View>
         <Button title="Sign Out" onPress={() => logout()} />
