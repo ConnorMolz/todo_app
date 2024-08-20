@@ -73,12 +73,12 @@ const UpdateTodo = () => {
                     numberOfLines={4}
                 />
         </View>
-        <View className='justify-center flex-row align-bottom justify-items-stretch'>
-            <View >
+        <View className='justify-between flex-row text-justify'>
+            <View className='' >
                 <Button title="Update Todo" onPress={updateTodo} />
             </View>
             <View>
-                <Button title="Cancel" onPress={() => router.navigate("/")} />
+                <Button title="Go Back" onPress={() => router.navigate("/")} />
             </View>
             <View>
                 <Button title="Delete Todo" onPress={() => deleteTodo()} />
