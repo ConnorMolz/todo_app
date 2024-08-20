@@ -41,6 +41,17 @@ const UpdateTodo = () => {
         })
     }
 
+    function deleteTodo(){
+        supabase.from('todos').delete().eq('id', todo_id).eq("from", session?.user.id).then(({ data, error }) => {
+            if (error) {
+                console.error('error', error)
+                return
+            }
+            console.log(data)
+            router.navigate("/");
+        })
+    }
+
 
     return (
         <View className='py-10 bg-neutral-700 flex-1'>
@@ -63,6 +74,8 @@ const UpdateTodo = () => {
                 />
         </View>
         <Button title="Update Todo" onPress={updateTodo} />
+        <Button title="Go Back" onPress={() => router.navigate("/")} />
+        <Button title="Delete Todo" onPress={() => deleteTodo()} />
     </View>
     )
 }
