@@ -1,10 +1,11 @@
-import { Slot } from "expo-router";
+import { Slot, Stack } from "expo-router";
 
 export default function RootLayout() {
     return (
     <Slot screenOptions={{
-        headerShown: false,
-        color: '#404040'
+        headerShown: true,
+        color: '#404040',
+        expand: true,
         }}
         
     />
