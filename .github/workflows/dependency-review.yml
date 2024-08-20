@@ -16,4 +16,3 @@ jobs:
           fail-on-severity: low
 
           deny-licenses: LGPL-2.0, BSD-2-Clause
-          allow-licenses: MIT, Apache, GNU GENERAL PUBLIC LICENSE Version 3
