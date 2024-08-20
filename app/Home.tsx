@@ -77,7 +77,7 @@ export default function Home() {
           </TouchableOpacity>
         ))
       }
-      <header className='justify-end  flex-row align-bottom place-content-end' slot='footer'>
+      <View className='justify-end  flex-row align-bottom place-content-end'>
       <View>
         <Button title="Create New Todo" onPress={() => gotToCreateTodo()} />
       </View>
@@ -87,7 +87,7 @@ export default function Home() {
       <View className='pb-10'>
         <Button title="Sign Out" onPress={() => logout()} />
       </View>
-      </header>
+      </View>
       </SafeAreaView>
     </ScrollView>
     </View>
