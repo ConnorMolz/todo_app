@@ -60,7 +60,7 @@ const all_todos = () => {
 
   return (
     <ScrollView>
-      <Text>All Todos</Text>
+      <Text className='text-4xl text-white text-center py-16'>All Todos</Text>
 
       {
         todos.map((todo) => (
