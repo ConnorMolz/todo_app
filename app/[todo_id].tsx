@@ -73,9 +73,17 @@ const UpdateTodo = () => {
                     numberOfLines={4}
                 />
         </View>
-        <Button title="Update Todo" onPress={updateTodo} />
-        <Button title="Go Back" onPress={() => router.navigate("/")} />
-        <Button title="Delete Todo" onPress={() => deleteTodo()} />
+        <View className='justify-between flex-row text-justify'>
+            <View className='' >
+                <Button title="Update Todo" onPress={updateTodo} />
+            </View>
+            <View>
+                <Button title="Go Back" onPress={() => router.navigate("/")} />
+            </View>
+            <View>
+                <Button title="Delete Todo" onPress={() => deleteTodo()} />
+            </View>
+            </View>
     </View>
     )
 }

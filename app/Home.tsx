@@ -63,7 +63,8 @@ export default function Home() {
   }
 
   return (
-    <ScrollView className='py-10 bg-neutral-700'>
+    <View>
+    <ScrollView className='py-10 bg-neutral-700' stickyHeaderHiddenOnScroll={false} invertStickyHeaders={true}>
       <SafeAreaView className='flex-1'>
       {
         todos.map((todo) => (
@@ -76,17 +77,19 @@ export default function Home() {
           </TouchableOpacity>
         ))
       }
-
+      <View className='justify-end  flex-row align-bottom place-content-end'>
       <View>
         <Button title="Create New Todo" onPress={() => gotToCreateTodo()} />
       </View>
       <View>
         <Button title="Show all Todos" onPress={() => goToAllTodos()} />
       </View>
-      <View className='pb-16'>
+      <View className='pb-10'>
         <Button title="Sign Out" onPress={() => logout()} />
+      </View>
       </View>
       </SafeAreaView>
     </ScrollView>
+    </View>
   )
 }
