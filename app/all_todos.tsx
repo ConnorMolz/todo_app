@@ -74,6 +74,7 @@ const all_todos = () => {
           </TouchableOpacity>
         ))
       }
+      <Button title="Home" onPress={() => router.navigate("/")} />
 
     </ScrollView>
   )
