@@ -7,6 +7,7 @@ import { router } from 'expo-router';
 
 const CreateTodo = () => {
     const [todo, setTodo] = React.useState('');
+    const [description, setDescription] = React.useState('');
     const [session, setSession] = React.useState<Session | null>(null)
 
     useEffect(() => {
@@ -17,7 +18,7 @@ const CreateTodo = () => {
 
     function sendTodo() {
         // @ts-ignore
-        supabase.from('todos').insert({ todo, from: session.user.id }).then(({ data, error }) => {
+        supabase.from('todos').insert({ todo, from: session.user.id, description }).then(({ data, error }) => {
             if (error) {
                 console.error('error', error)
                 return
@@ -35,12 +36,22 @@ const CreateTodo = () => {
                     value={todo}
                     onChangeText={setTodo}
                     className='bg-white p-2 m-2 scroll-py-10'
-                    multiline={true}
+                    maxLength={40}
                     editable={true}
-                    numberOfLines={5}
+                />
+                <TextInput placeholder="Enter description"
+                    value={description}
+                    onChangeText={setDescription}
+                    className='bg-white p-2 m-2 scroll-py-10'
+                    editable={true}
+                    multiline={true}
+                    numberOfLines={4}
                 />
             </View>
-            <Button onPress={sendTodo} title={"Create Todo"}>Create Todo</Button>
+            <View className='flex-1 flex-row justify-evenly py-10'>
+                <Button onPress={sendTodo} title={"Create Todo"}>Create Todo</Button>
+                <Button onPress={() => router.navigate("/")} title={"Cancle"}>Cancle</Button>
+            </View>
         </View>
     )
     }
