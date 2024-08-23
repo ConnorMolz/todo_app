@@ -54,7 +54,7 @@ const CreateTodo = () => {
             </View>
             <View className='flex-1 flex-row justify-evenly py-10'>
                 <Button onPress={sendTodo} title={"Create Todo"}>Create Todo</Button>
-                <Button onPress={() => router.navigate("/")} title={"Cancle"}>Cancle</Button>
+                <Button onPress={() => router.navigate("/")} title={"Cancel"}>Cancel</Button>
             </View>
         </View>
     )
