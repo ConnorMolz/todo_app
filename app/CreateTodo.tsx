@@ -1,4 +1,4 @@
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput, Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import { supabase } from '../lib/supabase';
 import { Session } from '@supabase/supabase-js';
@@ -17,6 +17,10 @@ const CreateTodo = () => {
     }, [])
 
     function sendTodo() {
+        if(!todo) {
+            Alert.alert("The todo can not be empty");
+            return;
+        }
         // @ts-ignore
         supabase.from('todos').insert({ todo, from: session.user.id, description }).then(({ data, error }) => {
             if (error) {

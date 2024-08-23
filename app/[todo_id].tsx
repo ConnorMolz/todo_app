@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button } from 'react-native'
+import { View, Text, TextInput, Button, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase';
 import { Session } from '@supabase/supabase-js';
@@ -31,6 +31,10 @@ const UpdateTodo = () => {
     }
 
     function updateTodo(){
+        if(!todo) {
+            Alert.alert("The todo can not be empty");
+            return;
+        }
         supabase.from('todos').update({ todo: todo, description: description }).eq('id', todo_id).eq("from", session?.user.id).then(({ data, error }) => {
             if (error) {
                 console.error('error', error)
