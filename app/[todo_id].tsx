@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, Alert, Modal } from 'react-native'
+import { View, Text, TextInput, Button, Alert, Modal, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase';
 import { Session } from '@supabase/supabase-js';
@@ -93,7 +93,7 @@ const UpdateTodo = () => {
 
 
     return (
-        <View className='py-10 bg-neutral-700 flex-1'>
+        <ScrollView className='py-10 bg-neutral-700 flex-1'>
         <Text className='text-4xl text-white text-center py-16'>Update Todo</Text>
         <View className='justify-center py-10'>
         <TextInput placeholder="Enter your todo" 
@@ -176,7 +176,7 @@ const UpdateTodo = () => {
                 <Button title="Delete Todo" onPress={() => deleteTodo()} />
             </View>
             </View>
-    </View>
+    </ScrollView>
     )
 }
 
