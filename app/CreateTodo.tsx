@@ -31,33 +31,28 @@ const CreateTodo = () => {
             Alert.alert("The todo can not be empty");
             return;
         }
+        if (hasTable) {
         // @ts-ignore
-        supabase.from('todos').insert({ todo, from: session.user.id, description, hasTable:hasTable }).then(({ data, error }) => {
+        supabase.from('todos').insert({ todo, from: session.user.id, description, table: tableData }).then(({ data, error }) => {
             if (error) {
                 console.error('error', error)
                 return
             }
             console.log(data)
-        if (hasTable) {
-            let current_id;
-            supabase.from('todos').select('id.max()').eq('from', session?.user.id).then(({ data, error }) => {
-    
-                if (error) {
-                    console.error('error', error)
-                    return
-                }
-                current_id = data[0].max;
-            })
-            supabase.from('table_items').insert({from: session?.user.id, todo_id: current_id, items: tableData}).then(({ data, error }) => {
+        })
+            router.navigate("/");
+        } 
+        else {
+            // @ts-ignore
+            supabase.from('todos').insert({ todo, from: session.user.id, description }).then(({ data, error }) => {
                 if (error) {
                     console.error('error', error)
                     return
                 }
                 console.log(data)
             })
+                router.navigate("/");
         }
-            router.navigate("/");
-        })
     }
 
     function createTable() {
