@@ -71,6 +71,7 @@ const UpdateTodo = () => {
 
     function createTable() {
         setHasTable(true);
+        setTableData([]);
         console.log("WIP")
     }
 
@@ -131,7 +132,8 @@ const UpdateTodo = () => {
                             <DataTable.Title><Text>Done</Text></DataTable.Title>
                             {/*<DataTable.Title> </DataTable.Title>*/}
                         </DataTable.Header>
-                            {tableData.map((item, index) => {
+                            {
+                                tableData.map((item, index) => {
                                 return (
                                     <DataTable.Row key={index}>
                                         <DataTable.Cell><Text>{item.entryName}</Text></DataTable.Cell>
@@ -140,7 +142,8 @@ const UpdateTodo = () => {
                                         {/*<DataTable.Cell><Button icon={<Entypo name="trash" size={24} color="black" />} onPress={() =>{delete(tableData[index])}}></Button></DataTable.Cell>*/}
                                     </DataTable.Row>
                                 )
-                            })}
+                            })
+                        }
                     </DataTable >
                     <Button onPress={openPopUp} title="Add item"></Button>
                     <Modal
