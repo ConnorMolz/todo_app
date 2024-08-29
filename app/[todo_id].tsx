@@ -78,6 +78,13 @@ const UpdateTodo = () => {
         setIsPopUpOpen(true);
     }
 
+    function cancelAddTableItem() {
+        setEntryChecked(false);
+        setEntryName('');
+        setEntryDescription('');
+        setIsPopUpOpen(false);
+    }
+
     function addTableItem() {
         const newEntry = {
             "entryName": entryName,
@@ -141,7 +148,7 @@ const UpdateTodo = () => {
                         visible={isPopUpOpen}
                         onRequestClose={() => addTableItem()}
                         >
-                        <View>
+                        <View className='py-10 bg-neutral-700 flex-1'>
                             <Input placeholder="Enter your Entry" 
                                 value={entryName}
                                 onChangeText={setEntryName}
@@ -161,6 +168,7 @@ const UpdateTodo = () => {
                                 onPress={() => setEntryChecked(!entryChecked)}
                             />
                             <Button onPress={addTableItem} title="Add item"></Button>
+                            <Button onPress={cancelAddTableItem} title="Cancel"></Button>
                         </View>
                     </Modal>
                 </View>
