@@ -10,6 +10,7 @@ const UpdateTodo = () => {
     const [todo, setTodo] = useState('');
     const [description, setDescription] = useState('');
     const [session, setSession] = useState<Session | null>(null)
+    const [tableData, setTableData] = React.useState<{ entryName: string, entryDescription: string, entryChecked: boolean }[]>([]);
 
     useEffect(() => {
         supabase.auth.getSession().then(async ({ data: { session } }) => {
@@ -20,7 +21,7 @@ const UpdateTodo = () => {
     }, [])
 
     async function getTodo(id :number) {
-         const { data, error } = await supabase.from('todos').select('todo, description').eq('id', id);
+         const { data, error } = await supabase.from('todos').select('todo, description, table').eq('id', id);
          if (error) {
             console.error('error', error);
             return '';
@@ -28,6 +29,7 @@ const UpdateTodo = () => {
          console.log(data);
          setTodo(data[0].todo);
          setDescription(data[0].description);
+         setTableData(data[0].table);
     }
 
     function updateTodo(){
@@ -35,7 +37,7 @@ const UpdateTodo = () => {
             Alert.alert("The todo can not be empty");
             return;
         }
-        supabase.from('todos').update({ todo: todo, description: description }).eq('id', todo_id).eq("from", session?.user.id).then(({ data, error }) => {
+        supabase.from('todos').update({ todo: todo, description: description, table: tableData }).eq('id', todo_id).eq("from", session?.user.id).then(({ data, error }) => {
             if (error) {
                 console.error('error', error)
                 return
